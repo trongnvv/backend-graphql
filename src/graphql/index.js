@@ -2,6 +2,7 @@ const ApolloServer = require('apollo-server-express').ApolloServer;
 const types = require('./types');
 const resolvers = require('./resolvers');
 const { jwtHandle } = require('../utils');
+const { UpperCaseDirective, AuthDirective } = require('./directives');
 
 const userInfo = async (authorization) => {
   if (!authorization)
@@ -27,6 +28,10 @@ module.exports = (app) => {
     },
     typeDefs: types,
     resolvers: resolvers,
+    schemaDirectives: {
+      upper: UpperCaseDirective,
+      auth: AuthDirective
+    },
     context: async ({ req }) => {
       // console.log('context', req.headers);
       // const user = await userInfo(req.headers.authorization);

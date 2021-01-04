@@ -57,6 +57,7 @@ module.exports = {
     },
   },
   User: {
-    password: () => null
+    password: () => null,
+    username: (v) => v.username + ' 123'
   }
 }

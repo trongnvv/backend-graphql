@@ -8,6 +8,14 @@ const varGQL = gql`
   #   defaultFormat: String = "MMMM Do YYYY"
   # ) on FIELD_DEFINITION
 
+  enum Role {
+    ADMIN
+    REVIEWER
+    USER
+    UNKNOWN
+  }
+  directive @upper on FIELD_DEFINITION
+  directive @auth(requires: Role = ADMIN) on OBJECT | FIELD_DEFINITION
   type Query {
     _: Boolean
   }

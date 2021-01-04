@@ -7,16 +7,16 @@ const httpError = require('http-errors');
 const path = require('path');
 const app = express();
 
-// connect DB
-require('./config/db');
-require('./src/graphql')(app);
 app.use(cors());
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
 app.use('/api/v1/', routers);
+
+// connect DB
+require('./config/db');
+require('./src/graphql')(app);
 
 app.use(function (req, res, next) {
   next(httpError(404));

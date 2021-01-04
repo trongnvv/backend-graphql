@@ -7,10 +7,10 @@ module.exports = gql`
     me: User
   }
 
-  type User {
+  type User @auth(requires: ADMIN) {
     id: ID!
-    username: String!
-    password: String
+    username: String! @upper
+    password: String 
   }
 
   type UserAuth {
