@@ -4,7 +4,10 @@ const { jwtHandle, bcryptHandle } = require('../../utils');
 
 module.exports = {
   Query: {
-    me: (parent, args, context) => { },
+    me: async (parent, args, context) => {
+      const user = await UserModel.findById(context.user.userID);
+      return user;
+    },
     user: async (parent, { id }, context, info) => {
       const user = await UserModel.findById(id);
       return user;
